@@ -45,21 +45,36 @@ public class DessinPanel2 extends JPanel {
 
 	private ArrayList<FormGeo> formesGeo;
 	private ArrayList<FormGeo> selectedFormesGeo;
+	
 	private FormGeo courant;
+	
 	private Point2D lastPointPress;
+	
 	private FormGeo lastFormGeo = null;
+	
 	private String lastFichier = ".";
 	private int Toutselec;
+	
 	private Color couleur;
 	private int TAILLECARREE = 30;
+	
 	private FormGeo.Type typeDeForme = FormGeo.Type.RECT;
+	
 	private Object object;
 	private int touche;
+	
+	private FormGeo noSelectForm;
 
+	// constructeur 
 	public DessinPanel2() {
 		formesGeo = new ArrayList<FormGeo>();
 		selectedFormesGeo = new ArrayList<FormGeo>();
 		courant = null;
+		
+		noSelectForm = new FormGeo(typeDeForme);
+		noSelectForm.setState(new NoSelection());
+		noSelectForm.doActivity();
+		
 		addMouseListener(new MouseHandler());
 		addMouseMotionListener(new MouseMotionHandler());
 	}
@@ -75,7 +90,8 @@ public class DessinPanel2 extends JPanel {
 
 	// EFFACE TOUT
 	public void clearAll() {
-
+		noSelectForm.setState(new AllSelection());
+		noSelectForm.doActivity();
 		clearSelected();
 		formesGeo.clear();
 		paintComponent(getGraphics());
@@ -103,13 +119,9 @@ public class DessinPanel2 extends JPanel {
 	}
 
 	public void selectTout() {
-		Toutselec = 1;
-		selectedFormesGeo.clear();
-		selectedFormesGeo.addAll(formesGeo);
-		for (FormGeo f : selectedFormesGeo) {
-			f.setSelected(true);
-		}
-		repaint();
+			noSelectForm.setState(new AllSelection());
+			noSelectForm.doActivity();
+			repaint();
 	}
 
 	public void coloreSelected() {
@@ -352,5 +364,7 @@ public class DessinPanel2 extends JPanel {
 			repaint();
 		}
 	}
+
+	
 
 }

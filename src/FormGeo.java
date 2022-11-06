@@ -11,6 +11,9 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import javax.swing.JPanel;
 
 /**
  * @param FormGeo
@@ -33,6 +36,17 @@ public class FormGeo implements Serializable {
 	// champs pourla couleur de l'objet et son type
 	private Color couleur; // la couleur de l'objet
 	private Type type;
+	
+	private EtatSelection etatSelection;
+	
+	public void setState(EtatSelection newEtat)
+	{
+		this.etatSelection = newEtat;
+	}
+	public void doActivity() {
+		etatSelection.doActivity();
+	}
+	
 
 	/**
 	 * Constructeur, qui selon le type pass� en argument, va initialiser rs avec
@@ -57,6 +71,7 @@ public class FormGeo implements Serializable {
 		} else if (td == Type.ELLIPSE) {
 			this.rs = new Ellipse2D.Double(x, y, w, h);
 		}
+		
 
 	}
 
@@ -132,4 +147,9 @@ public class FormGeo implements Serializable {
 	public void setFrameFromDiagonal(Point2D lastPointPress, Point2D p) {
 		this.rs.setFrameFromDiagonal(lastPointPress, p);
 	}
+
+//	---------------------------------------------------------------
+	
+	
+
 }

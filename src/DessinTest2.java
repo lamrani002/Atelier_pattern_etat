@@ -38,9 +38,16 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
 
+
+
+
+
+
+
 public class DessinTest2 {
 
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				DessinFrame application = new DessinFrame("paint drawing");
@@ -72,6 +79,7 @@ class DessinFrame extends JFrame {
 		
 		// PANNEAU DE DESSIN
 		PanelDesign = new DessinPanel2();
+		
 		PanelDesign.setCouleur(Color.BLACK);
 		PanelDesign.setBackground(Color.WHITE);
 		this.add(PanelDesign, BorderLayout.CENTER);
@@ -159,8 +167,9 @@ class DessinFrame extends JFrame {
 		Tout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+			
 				PanelDesign.selectTout();
+				
 			}
 
 		});
